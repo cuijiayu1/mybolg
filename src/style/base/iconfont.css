@@ -1,0 +1,15 @@
+/* 载入icon */
+@font-face {
+    font-family: 'iconfont';
+    src: url('@/style/base/fonts/iconfont.woff2?t=1663922963348') format('woff2'),
+        url('@/style/base/fonts/iconfont.woff?t=1663922963348') format('woff'),
+        url('@/style/base/fonts/iconfont.ttf?t=1663922963348') format('truetype');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,31 @@
+/* 设置断点属性 便于让js获得当前断点 
+其原理是根据媒体查询向body添加::after伪类，js监听这个伪类
+*/
+@media screen and (min-width: 0px) {
+    body::after {
+        content: "phone";
+        font-size: 0;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    body::after {
+        content: "pc";
+        font-size: 0;
+    }
+}
+
+/* 载入字体 */
+@font-face {
+    font-family: 'SourceHanSerifCN-SemiBold-7.otf';
+    src: url('@/style/base/fonts/SOURCEHANSERIFCN-SEMIBOLD-7.OTF') format('truetype');
+}
+
+/* 设置默认字号，将1rem = 100px，之后如使用10px写成0.1rem即可 */
+html {
+    font-size: 100px;
+}
+
+body {
+    font-size: .12rem;
+}
