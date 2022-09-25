@@ -1,10 +1,10 @@
 <template>
     <div class="btn">
-        <span v-show="!isNight" class="iconfont">&#xe636;</span>
-        <span v-show="isNight" class="iconfont">&#xe6a0;</span>
+        <span v-show="!modelValue" class="iconfont">&#xe636;</span>
+        <span v-show="modelValue" class="iconfont">&#xe6a0;</span>
         <label class="switch">
-            <input type="checkbox" @click="ClickBtn">
-            <div class="slider round" :class="{ checked:isNight }">
+            <input type="checkbox" @click="clickBtn">
+            <div class="slider round" :class="{ checked:modelValue }">
                 <span class="slider-text on"></span>
             </div>
         </label>
@@ -12,16 +12,20 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, toRefs } from 'vue'
 export default {
     name: 'NightBtn',
-    setup() {
-        let isNight = ref(false);
-        const ClickBtn = function () {
-            isNight.value = !isNight.value
+    props: {
+        modelValue: Boolean
+    },
+    emits: ["update:modelValue"],
+    setup(props, context) {
+        const { modelValue } = toRefs(props)
+        const clickBtn = function () {
+            context.emit('update:modelValue', !modelValue.value)
         }
         return {
-            isNight, ClickBtn
+            modelValue, clickBtn
         }
     }
 }
@@ -32,7 +36,7 @@ export default {
 .btn {
     display: flex;
     align-items: center;
-    font-size: $font-primary;
+    font-size: #fff;
 }
 
 .iconfont {
@@ -57,7 +61,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: #2196F3;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -69,7 +73,7 @@ export default {
     width: 16px;
     left: 4px;
     bottom: 3px;
-    background-color: $color-primary;
+    background-color: #fff;
     -webkit-transition: .4s;
     transition: .4s;
 }

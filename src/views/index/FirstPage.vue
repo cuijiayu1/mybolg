@@ -7,12 +7,11 @@
     </section>
 </template>
 <script>
+
 export default {
     name: 'header',
-    setup() {
-        return {
-            publicPath: process.env.BASE_URL
-        }
+    setup(props, context) {
+
     }
 }
 </script>
@@ -21,42 +20,84 @@ export default {
 @import '@/style/tools/mediaQuery.scss';
 @import '@/style/setting/var.scss';
 
-.main {
-    height: calc(100vh);
-    background-image: url('./background_img.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    color: $color-primary;
+.light {
+    .main {
+        height: calc(100vh);
+        background-image: url('./background_light_img.png');
+        background-repeat: no-repeat;
+        background-position: bottom;
+        color: $color-primary;
 
-    &__title {
-        text-align: center;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        &__title {
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
 
-        &__h1 {
-            font-size: 1.3rem;
-            white-space: nowrap;
-
-            @include phone {
-                font-size: 0.7rem;
+            &__h1 {
+                font-size: 1.3rem;
                 white-space: nowrap;
+
+                @include phone {
+                    font-size: 0.7rem;
+                    white-space: nowrap;
+                }
+            }
+
+            &__ana {
+                margin-top: 1rem;
+                font-size: 0.18rem;
+                line-height: 0.2rem;
+                letter-spacing: 1px;
+                font-family: 'SourceHanSerifCN-SemiBold-7.otf';
+
+                @include phone {
+                    font-size: 0.12rem;
+                }
             }
         }
+    }
+}
 
-        &__ana {
-            margin-top: 1rem;
-            font-size: 0.18rem;
-            line-height: 0.2rem;
-            letter-spacing: 1px;
-            font-family: 'SourceHanSerifCN-SemiBold-7.otf';
+.dark {
+    .main {
+        height: calc(100vh);
+        background-image: url('./background_dark_img.jpg');
+        background-repeat: no-repeat;
+        background-position: bottom;
+        color: #fff;
 
-            @include phone {
-                font-size: 0.12rem;
+        &__title {
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            text-shadow: 0px 0px 5px #3333;
+            transform: translate(-50%, -50%);
+
+            &__h1 {
+                font-size: 1.3rem;
+                white-space: nowrap;
+
+                @include phone {
+                    font-size: 0.7rem;
+                    white-space: nowrap;
+                }
+            }
+
+            &__ana {
+                margin-top: 1rem;
+                font-size: 0.18rem;
+                line-height: 0.2rem;
+                letter-spacing: 1px;
+                font-family: 'SourceHanSerifCN-SemiBold-7.otf';
+
+                @include phone {
+                    font-size: 0.12rem;
+                }
             }
         }
-
     }
 }
 </style>
