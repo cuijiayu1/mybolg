@@ -2,7 +2,7 @@
     <section class="main">
         <div class="main__title">
             <h1 class="main__title__h1">My Blog</h1>
-            <p class="main__title__ana">我的一生只需要清水，面包和工作 - 捷尔任斯基</p>
+            <p class="main__title__ana">祸兮福所倚，福兮祸所伏 - 道德经</p>
         </div>
     </section>
 </template>

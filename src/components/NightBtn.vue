@@ -102,7 +102,7 @@ export default {
     position: absolute;
     left: 24px;
     margin: 0 auto;
-    font-size: $font-primary;
+    font-size: $font-primary-contet;
     line-height: 22px
 }
 

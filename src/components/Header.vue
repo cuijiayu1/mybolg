@@ -1,5 +1,7 @@
 <template>
-  <div class="header">
+  <div class="header" :class="{
+    'show-on-front':isShowDetail
+  }">
     <div class="header__pc">
       <div class="header__pc__left">
         <a>关于我<span class="iconfont" style="padding-left: 4px;">&#xe600;</span></a>
@@ -16,32 +18,50 @@
         <NightBtn v-model="isNight" />
       </div>
 
-      <div class="header__phone__right">
-        <a><span class="iconfont">&#xe600;</span></a>
-      </div>
+      <div class="header__phone__right"><a @click="isShowDetail = !isShowDetail"><span
+            class="iconfont">&#xeaf1;</span></a></div>
     </div>
 
+    <div v-if="isShowDetail" class="header__showDetail">
+      <div class="header__showDetail__row">
+        <div class="header__showDetail__row__body"><span class="iconfont">&#xe600;</span>&nbsp;关于我</div>
+        <div class="header__showDetail__row__body"><span class="iconfont">&#xe646;</span>&nbsp;归档</div>
+      </div>
+      <div class="header__showDetail__row">
+        <div class="header__showDetail__row__body">mybolg</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { ref, watch } from 'vue'
+import useGetWinState from '../hooks/useGetWinState'
 import NightBtn from './NightBtn.vue'
 import useTheme from "../hooks/useTheme.js"
-const { getCurrentTheme,setlight, setDark } = useTheme();
+const { getCurrentTheme, setlight, setDark } = useTheme();
 export default {
   name: 'Header',
   components: {
     NightBtn
   },
   setup() {
-    let isNight = ref(false);
+    const isNight = ref(false);
+    const isShowDetail = ref(false);
     const currentTheme = getCurrentTheme()
     if (currentTheme == 'light' || currentTheme == null) {
       isNight.value = false;
     } else {
-      isNight.value = true
+      isNight.value = true;
     }
+
+    useGetWinState((state) => {
+      console.log(state)
+      if (state == `"pc"`) {
+
+        isShowDetail.value = false;
+      }
+    });
 
     watch(isNight, (newValue, oldValue) => {
       if (newValue) {
@@ -52,7 +72,8 @@ export default {
     })
 
     return {
-      isNight
+      isNight,
+      isShowDetail
     }
   }
 }
@@ -73,12 +94,11 @@ export default {
     height: 0.6rem;
     padding: 0 1rem;
     box-sizing: border-box;
-    font-size: $font-primary;
+    font-size: $font-primary-contet;
     color: #fff;
     background-color: $color-primary;
-
-    a {
-      padding-right: .2rem;
+    &__left{
+      a{margin-right: .3rem;}
     }
   }
 
@@ -105,5 +125,37 @@ export default {
       display: none;
     }
   }
+}
+
+.header__showDetail {
+  z-index: 999;
+  padding: 10px;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  font-size: $font-primary-contet;
+  color: #fff;
+  background-color: $color-primary;
+
+  &__row {
+    display: flex;
+    justify-content: space-around;
+
+    &__body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: .06rem;
+      padding: .2rem;
+      width: 100%;
+      background-color: #3f3f4c;
+    }
+  }
+}
+
+.show-on-front {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
 }
 </style>
